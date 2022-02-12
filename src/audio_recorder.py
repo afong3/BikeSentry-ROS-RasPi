@@ -66,8 +66,8 @@ def main():
     rate = rospy.Rate(2/3)
     
     while not rospy.is_shutdown():
-        time = time.time()
-        file = base_file_name.format(t = time)
+        t = time.time()
+        file = base_file_name.format(t = t)
         record_audio(SECONDS, file)
         audio_pub.publish(file) # remember this doesn't have the relative directory or .wav file extension
         rate.sleep()
