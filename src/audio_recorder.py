@@ -54,6 +54,7 @@ def record_audio(seconds, filename):
     wavefile.writeframes(b''.join(frames))
     wavefile.close()
 
+    print("{} saved".format(filename))
 def main():
     rospy.init_node("audio_recorder")
     
