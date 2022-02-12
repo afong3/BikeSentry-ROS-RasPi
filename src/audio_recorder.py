@@ -55,6 +55,7 @@ def record_audio(seconds, filename):
     wavefile.close()
 
     print("{} saved".format(filename))
+    
 def main():
     rospy.init_node("audio_recorder")
     
@@ -71,6 +72,7 @@ def main():
         t = time.time()
         file = base_file_name.format(t = math.floor(t))
         record_audio(SECONDS, file)
+        time.sleep(0.25) # adding a buffer to see if file will save before classifier goes after it 
         audio_pub.publish(file) # remember this doesn't have the relative directory or .wav file extension
         rate.sleep()
 
