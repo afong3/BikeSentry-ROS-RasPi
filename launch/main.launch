@@ -1,8 +1,8 @@
 <launch>
 
     <!-- AUDIO CLASSIFIER -->
-    <node name="audio_classifier" pkg="bike_sentry" type="audio_classifier.py"/>
+    <node name="audio_classifier" pkg="bike_sentry_raspi" type="audio_classifier.py"/>
     <!-- AUDIO RECORDER-->
-    <node name="audio_recorder" pkg="bike_sentry" type="audio_recorder.py"/>
+    <node name="audio_recorder" pkg="bike_sentry_raspi" type="audio_recorder.py"/>
 
 </launch>
