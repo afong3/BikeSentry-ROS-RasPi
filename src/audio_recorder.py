@@ -32,7 +32,7 @@ def record_audio(seconds, filename):
     stream = audio.open(format = form_1,rate = samp_rate,channels = chans, \
                         input_device_index = dev_index,input = True, \
                         frames_per_buffer=chunk)
-    print("\n\n\n\n\nRecording {} Started".format(filename))
+    rospy.loginfo(("\n\n\n\n\nRecording {} Started".format(filename)))
     frames = []
 
     # loop through stream and append audio chunks to frame array
@@ -40,7 +40,7 @@ def record_audio(seconds, filename):
         data = stream.read(chunk)
         frames.append(data)
 
-    print("Finished Recording")
+    rospy.loginfo(("Finished Recording"))
 
     # stop the stream, close it, and terminate the pyaudio instantiation
     stream.stop_stream()
@@ -55,7 +55,7 @@ def record_audio(seconds, filename):
     wavefile.writeframes(b''.join(frames))
     wavefile.close()
 
-    print("{} saved".format(filename))
+    rospy.loginfo(("{} saved".format(filename)))
     
     return filename
 
