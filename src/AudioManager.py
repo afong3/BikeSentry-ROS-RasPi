@@ -4,37 +4,22 @@
 import os
 import scipy.io.wavfile as wav
 from pickle import load
-import tensorflow as tf
 import numpy as np
 import time
 
 class AudioManager:
-	def __init__(self, model_path = "../tf_models/angle-grinder-detector-2s.tflite"):
+	def __init__(self):
 		"""
 		Initialize class with sample_rate of audio recordings.
 
 		"""
-		# Get input and output tensors.
-		self.interpreter = tf.lite.Interpreter(model_path = model_path)
-		self.interpreter.allocate_tensors()
-		self.input_details = self.interpreter.get_input_details()
-		self.output_details = self.interpreter.get_output_details()
-
-	def _SET_TENSOR(self, data):
-		"""
-		Wrapper on tf.lite.Interpreter.set_tensor()
-		"""
-		self.interpreter.set_tensor(self.input_details[0]['index'], data)
-
+  
 	def classify_audio(self, data):
 		"""
 		Returns float between 0 - 1, up to you to determine class from this. Can use softmax 
 		"""
-
-		self._SET_TENSOR(data)
-		output_data = self.interpreter.get_tensor(self.output_details[0]['index'])
-
-		return output_data[0][0]
+		
+		return 0 
 
 	def read_wav(self, file):
 		'''
