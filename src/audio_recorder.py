@@ -15,6 +15,7 @@ import math
 def record_audio(seconds, filename):
     '''
     Record a .wav file for a defined amount of seconds. Output to a user defined filename.
+    Return: string that has filename without file extension 
     '''
     form_1 = pyaudio.paInt16 # 16-bit resolution
     chans = 1 # 1 channel
@@ -56,6 +57,8 @@ def record_audio(seconds, filename):
 
     print("{} saved".format(filename))
     
+    return filename
+
 def main():
     rospy.init_node("audio_recorder")
     
@@ -71,9 +74,8 @@ def main():
     while not rospy.is_shutdown():
         t = time.time()
         file = base_file_name.format(t = math.floor(t))
-        record_audio(SECONDS, file)
-        time.sleep(5) # adding a buffer to see if file will save before classifier goes after it 
-        audio_pub.publish(file) # remember this doesn't have the relative directory or .wav file extension
+        rec = record_audio(SECONDS, file)
+        audio_pub.publish(rec) # remember this doesn't have the relative directory or .wav file extension
         rate.sleep()
 
 if __name__ == "__main__":
