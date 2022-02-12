@@ -13,7 +13,7 @@ import rospkg
 import sys
 
 rospack = rospkg.RosPack()
-pck_path = rospack.get_path('bike_sentry')
+pck_path = rospack.get_path('bike_sentry_raspi')
 
 path = ('module.name', pck_path + '/scripts')
 
