@@ -16,7 +16,7 @@ rospack = rospkg.RosPack()
 pck_path = rospack.get_path('bike_sentry_raspi')
 
 path = ('module.name', pck_path + '/scripts')
-
+print(path)
 sys.path.append(path) # adding /scripts directory of ROS package to path to import AudioManager
 
 import AudioManager 
