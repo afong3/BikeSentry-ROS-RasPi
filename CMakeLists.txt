@@ -13,3 +13,15 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   yaml
 )
+
+catkin_package(
+    CATKIN_DEPENDS
+    roscpp
+    rospy
+    std_msgs
+    yaml
+)
+
+include_directories(include ${catkin_INCLUDE_DIRS})
+
+catkin_install_python(PROGRAMS src/audio_recorder.py src/audio_classifier.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
