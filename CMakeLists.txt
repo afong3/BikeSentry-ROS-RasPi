@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(bike_sentry)
+project(bike_sentry_raspi)
 # locate dependencies
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -11,7 +11,6 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  yaml
 )
 
 catkin_package(
@@ -19,7 +18,6 @@ catkin_package(
     roscpp
     rospy
     std_msgs
-    yaml
 )
 
 include_directories(include ${catkin_INCLUDE_DIRS})
