@@ -9,7 +9,7 @@ import numpy as np
 import time
 
 class AudioManager:
-	def __init__(self, model_path = "angle-grinder-detector-2s.tflite"):
+	def __init__(self, model_path = "../tf_models/angle-grinder-detector-2s.tflite"):
 		"""
 		Initialize class with sample_rate of audio recordings.
 
