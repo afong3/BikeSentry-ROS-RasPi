@@ -23,7 +23,7 @@ def record_audio(seconds, filename):
     record_secs = seconds # seconds to record
     dev_index = 2 # device index found by p.get_device_info_by_index(ii)
     recordings_directory = "../recordings/"
-    wav_output_filename = recordings_directory + filename # name of .wav file
+    wav_output_filename = recordings_directory + filename + ".wav" # name of .wav file
 
     audio = pyaudio.PyAudio() # create pyaudio instantiation
 
