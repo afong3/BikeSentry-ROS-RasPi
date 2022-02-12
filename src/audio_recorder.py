@@ -10,6 +10,7 @@ import os
 import wave
 import pyaudio
 import time
+import math
 
 def record_audio(seconds, filename):
     '''
@@ -67,7 +68,7 @@ def main():
     
     while not rospy.is_shutdown():
         t = time.time()
-        file = base_file_name.format(t = t)
+        file = base_file_name.format(t = math.floor(t))
         record_audio(SECONDS, file)
         audio_pub.publish(file) # remember this doesn't have the relative directory or .wav file extension
         rate.sleep()
