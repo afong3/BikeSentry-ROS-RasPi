@@ -22,7 +22,6 @@ def record_audio(seconds, filename):
     Record a .wav file for a defined amount of seconds. Output to a user defined filename.
     Return: string that has filename without file extension 
     '''
-    print(pck_path) 
     form_1 = pyaudio.paInt16 # 16-bit resolution
     chans = 1 # 1 channel
     samp_rate = 44100 # 44.1kHz sampling rate
