@@ -16,20 +16,20 @@ import rospkg
 
 rospack = rospkg.RosPack()
 pck_path = rospack.get_path('bike_sentry_raspi')
-print(pck_path)
 
 def record_audio(seconds, filename):
     '''
     Record a .wav file for a defined amount of seconds. Output to a user defined filename.
     Return: string that has filename without file extension 
     '''
+    print(pck_path) 
     form_1 = pyaudio.paInt16 # 16-bit resolution
     chans = 1 # 1 channel
     samp_rate = 44100 # 44.1kHz sampling rate
     chunk = 4096 # 2^12 samples for buffer
     record_secs = seconds # seconds to record
     dev_index = 2 # device index found by p.get_device_info_by_index(ii)
-    recordings_directory = "../recordings/"
+    recordings_directory = pck_path + '/recordings'
     wav_output_filename = recordings_directory + filename + ".wav" # name of .wav file
 
     audio = pyaudio.PyAudio() # create pyaudio instantiation
