@@ -11,6 +11,12 @@ import wave
 import pyaudio
 import time
 import math
+import rospkg
+
+
+rospack = rospkg.RosPack()
+pck_path = rospack.get_path('bike_sentry_raspi')
+print(pck_path)
 
 def record_audio(seconds, filename):
     '''
@@ -74,8 +80,7 @@ def main():
     while not rospy.is_shutdown():
         t = time.time()
         file = base_file_name.format(t = math.floor(t))
-        rec = record_audio(SECONDS, file)
-        audio_pub.publish(rec) # remember this doesn't have the relative directory or .wav file extension
+        audio_pub.publish(record_audio(SECONDS, file)) # remember this doesn't have the relative directory or .wav file extension
         rate.sleep()
 
 if __name__ == "__main__":
