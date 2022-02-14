@@ -2,6 +2,7 @@
 
 import wave
 import pyaudio
+import scipy.io.wavfil as wav
 
 def record_audio(seconds, filename):
     '''
@@ -52,6 +53,9 @@ if __name__ == "__main__":
     counter = 0
 
     record_audio(5, "testing_float.wav")
+    
+    sr, audio = wav.read(open("testing_float.wav", 'rb'))
+    print(audio)
     # # record audio until told otherwise
     # while(True):
     #     record_audio(SECONDS, base_file_name.format(n = counter) + '.wav')
