@@ -25,8 +25,8 @@ AM = AudioManager.AudioManager(model = pck_path + "/models/binary_classifier.job
 
 def classifier_callback(filename):
     f = filename.data
-    rospy.loginfo("WORK!!! {f}".format(f=f))
-    full_file = "../recordings/{}.wav".format(f)
+    rospy.loginfo("File to classify {f}".format(f=f))
+    full_file = pck_path + "/recordings/{}.wav".format(f)
     sample_rate, audio = AM.read_wav(full_file)
     audio_scaled = AM.process_recording(audio, sample_rate)
     
