@@ -28,7 +28,7 @@ def record_audio(seconds, filename):
     chunk = 4096 # 2^12 samples for buffer
     record_secs = seconds # seconds to record
     dev_index = 2 # device index found by p.get_device_info_by_index(ii)
-    recordings_directory = pck_path + '/recordings'
+    recordings_directory = pck_path + '/recordings/'
     wav_output_filename = recordings_directory + filename + ".wav" # name of .wav file
 
     audio = pyaudio.PyAudio() # create pyaudio instantiation
