@@ -38,8 +38,8 @@ def testing_tf(input):
 
 def main():
     rospy.init_node("audio_classifier")
-    #rospy.Subscriber("/recording", String, classifier_callback)
-    rospy.Subscriber("/recording", String, testing_tf)
+    rospy.Subscriber("/recording", String, classifier_callback)
+    #rospy.Subscriber("/recording", String, testing_tf)
     rospy.spin()
 
 if __name__ == "__main__":
