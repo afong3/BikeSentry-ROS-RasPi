@@ -42,7 +42,7 @@ class AudioManager:
 		"""
 
 		# preprocessing is raw -> mfcc's -> scale -> classify
-		mfcc = librosa.feature.mfcc(rec, sr = sample_rate).flatten()
+		mfcc = librosa.feature.mfcc(y = rec, sr = sample_rate).flatten()
 		scaled = self.scaler.transform([mfcc])
 
 		return scaled
