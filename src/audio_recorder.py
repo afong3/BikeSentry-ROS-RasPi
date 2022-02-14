@@ -23,7 +23,7 @@ def record_audio(duration, filename):
     Record a .wav file for a defined amount of duration. Output to a user defined filename.
     Return: string that has filename without file extension 
     '''
-    full_path = pck_path + "/" + filename + ".wav"
+    full_path = pck_path + "/recordings/" + filename + ".wav"
     fs = 44100
     sd.default.samplerate = fs
     sd.default.channels = 1
@@ -33,7 +33,9 @@ def record_audio(duration, filename):
 
     # save .wav
     wav.write(full_path, fs, rec)
-
+    
+    rospy.loginfo("Saved recording: {}".format(full_path))
+    
     return filename
 
 def main():
