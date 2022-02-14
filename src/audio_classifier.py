@@ -34,7 +34,7 @@ def classifier_callback(filename):
     rospy.loginfo("{f} is {r}".format(f=f, r=result))
 
 def testing_tf(input):
-    rospy.loginfo("Filename to classify: {}".format(input))
+    rospy.loginfo("Filename to classify: {}".format(input.data))
 
 def main():
     rospy.init_node("audio_classifier")
