@@ -22,7 +22,7 @@ class AudioManager:
 		"""
 		c = self.model.predict(X)
   
-		return c
+		return c[0]
 
 	def read_wav(self, file):
 		'''
@@ -43,7 +43,7 @@ class AudioManager:
 
 		# preprocessing is raw -> mfcc's -> scale -> classify
 		mfcc = librosa.feature.mfcc(rec, sr = sample_rate).flatten()
-		scaled = scaler.transform(rec)
+		scaled = scaler.transform([mfcc])
 
 		return scaled
 
