@@ -10,11 +10,11 @@ from joblib import load as j_load
 import librosa
 
 class AudioManager:
-	def __init__(self, model = j_load("../models/binary_classifier.joblib")):
+	def __init__(self, model):
 		"""
 		Initialize class with sample_rate of audio recordings.
 		"""
-		self.model = model
+		self.model = j_load(model)
 
 	def classify_audio(self, X):
 		"""
