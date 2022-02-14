@@ -23,8 +23,7 @@ def record_audio(duration, filename):
     Record a .wav file for a defined amount of duration. Output to a user defined filename.
     Return: string that has filename without file extension 
     '''
-    f = filename.data
-    full_path = pck_path + "/" + f + ".wav"
+    full_path = pck_path + "/" + filename + ".wav"
     fs = 44100
     sd.default.samplerate = fs
     sd.default.channels = 1
