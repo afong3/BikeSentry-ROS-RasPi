@@ -15,7 +15,7 @@ class AudioManager:
 		Initialize class with sample_rate of audio recordings.
 		"""
 		self.model = j_load(model)
-		self.scaler = p_load(scaler)
+		self.scaler = p_load(open(scaler, 'rb'))
 
 	def classify_audio(self, X):
 		"""
