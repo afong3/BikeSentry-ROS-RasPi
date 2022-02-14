@@ -2,7 +2,7 @@
 
 import wave
 import pyaudio
-import scipy.io.wavfil as wav
+import scipy.io.wavfile as wav
 
 def record_audio(seconds, filename):
     '''
