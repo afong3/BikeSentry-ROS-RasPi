@@ -71,7 +71,7 @@ def main():
     
     # set sampling rate
     # if this runs at 2/3 Hz, there should be a slight gap between recordings but that's fine
-    rate = rospy.Rate(2/3)
+    rate = rospy.Rate(1)
     
     while not rospy.is_shutdown():
         t = time.time()
