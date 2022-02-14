@@ -71,14 +71,13 @@ def main():
     
     # set sampling rate
     # if this runs at 2/3 Hz, there should be a slight gap between recordings but that's fine
-    rate = rospy.Rate(1)
+    rate = rospy.Rate(2/3)
     
     while not rospy.is_shutdown():
         t = time.time()
         file = base_file_name.format(t = math.floor(t))
         n = record_audio(SECONDS, file)
         audio_pub.publish(n) # remember this doesn't have the relative directory or .wav file extension
-        audio_pub.publish("test")
         rate.sleep()
 
 if __name__ == "__main__":
