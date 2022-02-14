@@ -10,7 +10,7 @@ from joblib import load as j_load
 import librosa
 
 class AudioManager:
-	def __init__(self, model, scaler):
+	def __init__(self, model = None, scaler = None):
 		"""
 		Initialize class with sample_rate of audio recordings.
 		"""
