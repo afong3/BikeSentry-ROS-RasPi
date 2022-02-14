@@ -34,7 +34,7 @@ def record_audio(duration, filename):
     # save .wav
     wav.write(full_path, fs, rec)
 
-    return f
+    return filename
 
 def main():
     rospy.init_node("audio_recorder")
