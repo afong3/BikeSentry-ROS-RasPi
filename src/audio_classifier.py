@@ -24,16 +24,16 @@ import AudioManager
 AM = AudioManager.AudioManager()
 
 def listener_rec():
-    #rospy.Subscriber("/recording", String, classifier_callback)
-    rospy.Subscriber("/recording", String, testing_tf)
+    rospy.Subscriber("/recording", String, classifier_callback)
+    #rospy.Subscriber("/recording", String, testing_tf)
     
 def classifier_callback(filename):
     f = filename.data
     full_file = "../recordings/{}.wav".format(f)
-    sample_rate, y = AM.read_wav(full_file)
-    y_scaled = AM.process_recording(y, sample_rate)
+    sample_rate, audio = AM.read_wav(full_file)
+    audio_scaled = AM.process_recording(audio, sample_rate)
     
-    result = AM.classify_audio(y_scaled)
+    result = AM.classify_audio(audio_scaled)
     rospy.loginfo("{f} is {r}".format(f=f, r=result))
 
 def testing_tf(input):
