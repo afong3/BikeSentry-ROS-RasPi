@@ -1,62 +1,20 @@
-# record n second .wav files until the process is stopped
-
-import wave
-import pyaudio
+# pyaudio won't let me record in float32... sooo a new package it is!
+import sounddevice as sd
 import scipy.io.wavfile as wav
 
-def record_audio(seconds, filename):
-    '''
-    Record a .wav file for a defined amount of seconds. Output to a user defined filename.
-    '''
-    form_1 = pyaudio.paFloat32 # Float
-    chans = 1 # 1 channel
-    samp_rate = 44100 # 44.1kHz sampling rate
-    chunk = 4096 # 2^12 samples for buffer
-    record_secs = seconds # seconds to record
-    dev_index = 2 # device index found by p.get_device_info_by_index(ii)
-    recordings_directory = "recordings/"
-    wav_output_filename = recordings_directory + filename # name of .wav file
+# setup
+duration = 5 # seconds
+fs = 44100
+sd.default.samplerate = fs
+sd.default.channels = 1
 
-    audio = pyaudio.PyAudio() # create pyaudio instantiation
+rec = sd.rec(int(duration * fs))
+sd.wait()
 
-    # create pyaudio stream
-    stream = audio.open(format = form_1,rate = samp_rate,channels = chans, \
-                        input_device_index = dev_index,input = True, \
-                        frames_per_buffer=chunk)
-    print("\n\n\n\n\nRecording {} Started".format(filename))
-    frames = []
+# save .wav
+filename = "/recordings/testing_float.wav"
+wav.write(filename, fs, rec)
 
-    # loop through stream and append audio chunks to frame array
-    for ii in range(0,int((samp_rate/chunk)*record_secs)):
-        data = stream.read(chunk)
-        frames.append(data)
-
-    print("Finished Recording")
-
-    # stop the stream, close it, and terminate the pyaudio instantiation
-    stream.stop_stream()
-    stream.close()
-    audio.terminate()
-
-    # save the audio frames as .wav file
-    wavefile = wave.open(wav_output_filename,'wb')
-    wavefile.setnchannels(chans)
-    wavefile.setsampwidth(audio.get_sample_size(form_1))
-    wavefile.setframerate(samp_rate)
-    wavefile.writeframes(b''.join(frames))
-    wavefile.close()
-
-
-if __name__ == "__main__":
-    SECONDS = 0.5
-    base_file_name = "recording_{n}"
-    counter = 0
-
-    record_audio(5, "testing_float.wav")
-    
-    sr, audio = wav.read(open("testing_float.wav", 'rb'))
-    print(audio)
-    # # record audio until told otherwise
-    # while(True):
-    #     record_audio(SECONDS, base_file_name.format(n = counter) + '.wav')
-    #     counter += 1
+# open .wav
+sr, audio = wav.read(filename)
+print(audio)
