@@ -21,7 +21,8 @@ pck_path = rospack.get_path('bike_sentry_raspi')
 
 import AudioManager 
 
-AM = AudioManager.AudioManager(model = pck_path + "/models/binary_classifier.joblib")
+AM = AudioManager.AudioManager(model = pck_path + "/models/binary_classifier.joblib",
+                               scaler = pck_path + "/models/mfcc_scaler.pkl")
 
 def classifier_callback(filename):
     f = filename.data

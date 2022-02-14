@@ -10,11 +10,12 @@ from joblib import load as j_load
 import librosa
 
 class AudioManager:
-	def __init__(self, model):
+	def __init__(self, model, scaler):
 		"""
 		Initialize class with sample_rate of audio recordings.
 		"""
 		self.model = j_load(model)
+		self.scaler = p_load(scaler)
 
 	def classify_audio(self, X):
 		"""
@@ -39,11 +40,10 @@ class AudioManager:
 		raw_mic_data must be entered as a .wav file without lossy compression
 		Returns: frequency data as a list 
 		"""
-		scaler = p_load(open('../models/mfcc_scaler.pkl', 'rb'))
 
 		# preprocessing is raw -> mfcc's -> scale -> classify
 		mfcc = librosa.feature.mfcc(rec, sr = sample_rate).flatten()
-		scaled = scaler.transform([mfcc])
+		scaled = self.scaler.transform([mfcc])
 
 		return scaled
 
