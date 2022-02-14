@@ -21,7 +21,7 @@ pck_path = rospack.get_path('bike_sentry_raspi')
 
 import AudioManager 
 
-AM = AudioManager.AudioManager()
+AM = AudioManager.AudioManager(model = pck_path + "/models/binary_classifier.joblib")
 
 def classifier_callback(filename):
     f = filename.data
@@ -34,7 +34,7 @@ def classifier_callback(filename):
     rospy.loginfo("{f} is {r}".format(f=f, r=result))
 
 def testing_tf(input):
-    rospy.loginfo("Filename to classify: {}".format(input.data))
+    rospy.loginfo("Filename to classify: TEST DAMNit")
 
 def main():
     rospy.init_node("audio_classifier")
