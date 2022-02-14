@@ -12,7 +12,7 @@ rec = sd.rec(int(duration * fs))
 sd.wait()
 
 # save .wav
-filename = "/recordings/testing_float.wav"
+filename = "recordings/testing_float.wav"
 wav.write(filename, fs, rec)
 
 # open .wav
