@@ -23,10 +23,6 @@ import AudioManager
 
 AM = AudioManager.AudioManager()
 
-def listener_rec():
-    rospy.Subscriber("/recording", String, classifier_callback)
-    #rospy.Subscriber("/recording", String, testing_tf)
-    
 def classifier_callback(filename):
     f = filename.data
     rospy.loginfo("WORK!!! {f}".format(f=f))
@@ -42,7 +38,8 @@ def testing_tf(input):
 
 def main():
     rospy.init_node("audio_classifier")
-    listener_rec()
+    #rospy.Subscriber("/recording", String, classifier_callback)
+    rospy.Subscriber("/recording", String, testing_tf)
     rospy.spin()
 
 if __name__ == "__main__":
