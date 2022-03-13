@@ -36,7 +36,7 @@ def classifier_callback(filename):
     
     # send to topic 
     class_pub = rospy.Publisher("/recording_class", String, queue_size = 100)
-    class_pub.Publish("{f} is {r}".format(f=f, r=result))
+    class_pub.publish("{f} is {r}".format(f=f, r=result))
     
 def testing_tf(input):
     rospy.loginfo("Filename to classify: TEST DAMNit")
