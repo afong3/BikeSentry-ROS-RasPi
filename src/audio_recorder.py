@@ -44,7 +44,7 @@ def main():
     
     audio_pub = rospy.Publisher("/recording", String, queue_size = 100)
     # how long to record audio and what to name the recording
-    SECONDS = 0.5
+    SECONDS = 2
     base_file_name = "recording_{t}"
     
     # set sampling rate
