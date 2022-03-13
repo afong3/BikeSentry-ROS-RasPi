@@ -11,6 +11,7 @@ from std_msgs.msg import String
 import os
 import rospkg
 import sys
+import requests
 
 rospack = rospkg.RosPack()
 pck_path = rospack.get_path('bike_sentry_raspi')
@@ -38,6 +39,14 @@ def classifier_callback(filename):
     class_pub = rospy.Publisher("/recording_class", String, queue_size = 100)
     class_pub.publish("{f} is {r}".format(f=f, r=result))
     
+    if result == 1:
+        theft_alert()
+    
+def theft_alert():
+    url = r"https://bike-sentry-api-2vgam74tba-uc.a.run.app/theft_alert/T0"
+    _ = requests.post(url)
+
+
 def testing_tf(input):
     rospy.loginfo("Filename to classify: TEST DAMNit")
 
