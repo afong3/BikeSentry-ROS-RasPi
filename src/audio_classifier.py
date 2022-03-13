@@ -50,7 +50,7 @@ def classifier_callback(filename):
         pin_output(1)
         HAS_TRIGGERED = True
     else:
-        pin_output(0)
+        pass
     
 def theft_alert():
     url = r"https://bike-sentry-api-2vgam74tba-uc.a.run.app/theft_alert/T0"
