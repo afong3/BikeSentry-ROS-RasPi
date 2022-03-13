@@ -12,6 +12,8 @@ sd.default.dtype = "int16"
 rec = sd.rec(int(duration * fs))
 sd.wait()
 
+print(rec.dtype)
+
 # save .wav
 filename = "recordings/testing_float.wav"
 wav.write(filename, fs, rec)
