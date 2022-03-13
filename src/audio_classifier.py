@@ -12,6 +12,7 @@ import os
 import rospkg
 import sys
 import requests
+import RPi.GPIO as GPIO
 
 rospack = rospkg.RosPack()
 pck_path = rospack.get_path('bike_sentry_raspi')
@@ -41,11 +42,26 @@ def classifier_callback(filename):
     
     if result == 1:
         theft_alert()
+        pin_output(1)
+    else:
+        pin_output(0)
     
 def theft_alert():
     url = r"https://bike-sentry-api-2vgam74tba-uc.a.run.app/theft_alert/T0"
     _ = requests.post(url)
 
+def setup():
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BCM)
+    pin = 8
+    
+    GPIO.setup(pin, GPIO.OUT, initial = GPIO.LOW)
+
+def pin_output(logic):
+    if logic == 0:
+        GPIO.output(8, GPIO.LOW)
+    else:
+        GPIO.output(8, GPIO.HIGH)
 
 def testing_tf(input):
     rospy.loginfo("Filename to classify: TEST DAMNit")

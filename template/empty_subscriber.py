@@ -13,5 +13,6 @@ def main():
     rospy.Subscriber("example_topic", Float32, sub_callback)
     rospy.spin()
 
+
 if __name__ == "__main__":
     main()

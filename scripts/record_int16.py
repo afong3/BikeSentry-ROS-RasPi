@@ -3,7 +3,7 @@ import sounddevice as sd
 import scipy.io.wavfile as wav
 
 # setup
-duration = 5 # seconds
+duration = 5  # seconds
 fs = 44100
 sd.default.samplerate = fs
 sd.default.channels = 1
