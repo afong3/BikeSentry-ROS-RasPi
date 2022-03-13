@@ -7,6 +7,7 @@ duration = 5 # seconds
 fs = 44100
 sd.default.samplerate = fs
 sd.default.channels = 1
+sd.default.dtype = "int16"
 
 rec = sd.rec(int(duration * fs))
 sd.wait()
