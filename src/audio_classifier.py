@@ -23,6 +23,8 @@ pck_path = rospack.get_path('bike_sentry_raspi')
 
 import AudioManager 
 
+HAS_TRIGGERED = False
+
 AM = AudioManager.AudioManager(model = pck_path + "/models/binary_classifier.joblib",
                                scaler = pck_path + "/models/mfcc_scaler.pkl")
 
@@ -40,9 +42,11 @@ def classifier_callback(filename):
     class_pub = rospy.Publisher("/recording_class", String, queue_size = 100)
     class_pub.publish("{f} is {r}".format(f=f, r=result))
     
-    if result == 1:
+    if (result == 1) and HAS_TRIGGERED == False:
         theft_alert()
         pin_output(1)
+        HAS_TRIGGERED = True
+        
     else:
         pin_output(0)
     
@@ -53,15 +57,15 @@ def theft_alert():
 def setup():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
-    pin = 8
+    pin = 17
     
-    GPIO.setup(pin, GPIO.OUT, initial = GPIO.LOW)
+    GPIO.setup(pin, GPIO.OUT)
 
 def pin_output(logic):
     if logic == 0:
-        GPIO.output(8, GPIO.LOW)
+        GPIO.output(17, GPIO.LOW)
     else:
-        GPIO.output(8, GPIO.HIGH)
+        GPIO.output(17, GPIO.HIGH)
 
 def testing_tf(input):
     rospy.loginfo("Filename to classify: TEST DAMNit")
