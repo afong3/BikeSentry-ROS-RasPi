@@ -29,6 +29,8 @@ AM = AudioManager.AudioManager(model = pck_path + "/models/binary_classifier.job
                                scaler = pck_path + "/models/mfcc_scaler.pkl")
 
 def classifier_callback(filename):
+    global HAS_TRIGGERED
+    
     f = filename.data
     
     rospy.loginfo("File to classify {f}".format(f=f))
@@ -42,11 +44,11 @@ def classifier_callback(filename):
     class_pub = rospy.Publisher("/recording_class", String, queue_size = 100)
     class_pub.publish("{f} is {r}".format(f=f, r=result))
     
-    if (result == 1) and HAS_TRIGGERED == False:
+    if result == 1 and HAS_TRIGGERED == False:
+        class_pub.publish("entered the conditional")
         theft_alert()
         pin_output(1)
         HAS_TRIGGERED = True
-        
     else:
         pin_output(0)
     
