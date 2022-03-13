@@ -26,19 +26,24 @@ AM = AudioManager.AudioManager(model = pck_path + "/models/binary_classifier.job
 
 def classifier_callback(filename):
     f = filename.data
+    
     rospy.loginfo("File to classify {f}".format(f=f))
     full_file = pck_path + "/recordings/{}.wav".format(f)
     sample_rate, audio = AM.read_wav(full_file)
     audio_scaled = AM.process_recording(audio, sample_rate)
     
     result = AM.classify_audio(audio_scaled)
-    rospy.loginfo("{f} is {r}".format(f=f, r=result))
-
+    
+    # send to topic 
+    class_pub = rospy.Publisher("/recording_class", String, queue_size = 100)
+    class_pub.Publish("{f} is {r}".format(f=f, r=result))
+    
 def testing_tf(input):
     rospy.loginfo("Filename to classify: TEST DAMNit")
 
 def main():
     rospy.init_node("audio_classifier")
+    
     rospy.Subscriber("/recording", String, classifier_callback)
     #rospy.Subscriber("/recording", String, testing_tf)
     rospy.spin()
