@@ -18,9 +18,9 @@ def setup():
 
 def pin_output(logic):
     if logic == 0:
-        GPIO.output(17, GPIO.LOW)
+        GPIO.output(OUTPUT_GPIO, GPIO.LOW)
     else:
-        GPIO.output(17, GPIO.HIGH)
+        GPIO.output(OUTPUT_GPIO, GPIO.HIGH)
 
 def theft_alert():
     url = r"https://bike-sentry-api-2vgam74tba-uc.a.run.app/theft_alert/T0"
