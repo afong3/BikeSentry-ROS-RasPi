@@ -1,12 +1,7 @@
 #!/usr/bin/python3
 
-from re import S
-from sre_constants import IN
-
-from matplotlib.cbook import Stack
 import rospy
 from std_msgs.msg import String
-import rospkg
 import RPi.GPIO as GPIO
 import requests
 
