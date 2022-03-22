@@ -26,17 +26,24 @@ def theft_alert():
     url = r"https://bike-sentry-api-2vgam74tba-uc.a.run.app/theft_alert/T0"
     _ = requests.post(url)
 
+def resolve_theft():
+    url = r"https://bike-sentry-api-2vgam74tba-uc.a.run.app/resolve_theft/T0"
+    _ = requests.post(url)
+
 def class_callback(c):
     global HAS_TRIGGERED
 
     result = int(c.data)
     override_switch = GPIO.input(INPUT_GPIO)
     
-    if override_switch == 0: # if override pin is not given power, STATE is forced to be zero
+    if override_switch == 1: # if override pin is not given power, STATE is forced to be zero
         HAS_TRIGGERED = 0 # reset HAS_TRIGGERED with button press / switch
+        resolve_theft()
+        rospy.loginfo("Override switch activated")
         pin_output(0)
     elif result == 1 and HAS_TRIGGERED == 0:
         HAS_TRIGGERED = 1
+        rospy.loginfo("Triggered")
         theft_alert() # don't spam cyclists 
         pin_output(1)
     elif HAS_TRIGGERED == 1:
@@ -48,6 +55,7 @@ def class_callback(c):
 def main():
     rospy.init_node("gpio_handler")
     rospy.Subscriber("/recording_class", String, class_callback)
+    rospy.spin()
 
 if __name__ == "__main__":
     setup()
