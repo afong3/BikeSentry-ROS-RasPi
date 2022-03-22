@@ -5,14 +5,10 @@
 # Node which listens to the /recording topic and classifies the files that it is told to
 # will eventually output a voltage to some pin to connect to Jetson Nano
 
-# NOT TESTED
+
 import rospy
 from std_msgs.msg import String
-import os
 import rospkg
-import sys
-import requests
-import RPi.GPIO as GPIO
 
 rospack = rospkg.RosPack()
 pck_path = rospack.get_path('bike_sentry_raspi')
@@ -42,43 +38,14 @@ def classifier_callback(filename):
     
     # send to topic 
     class_pub = rospy.Publisher("/recording_class", String, queue_size = 100)
-    class_pub.publish("{f} is {r}".format(f=f, r=result))
+    class_pub.publish("{r}".format(r = result))
     
-    if result == 1 and HAS_TRIGGERED == False:
-        class_pub.publish("entered the conditional")
-        theft_alert()
-        pin_output(1)
-        HAS_TRIGGERED = True
-    else:
-        pass
-    
-def theft_alert():
-    url = r"https://bike-sentry-api-2vgam74tba-uc.a.run.app/theft_alert/T0"
-    _ = requests.post(url)
-
-def setup():
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BCM)
-    pin = 17
-    
-    GPIO.setup(pin, GPIO.OUT)
-
-def pin_output(logic):
-    if logic == 0:
-        GPIO.output(17, GPIO.LOW)
-    else:
-        GPIO.output(17, GPIO.HIGH)
-
-def testing_tf(input):
-    rospy.loginfo("Filename to classify: TEST DAMNit")
 
 def main():
     rospy.init_node("audio_classifier")
     
     rospy.Subscriber("/recording", String, classifier_callback)
-    #rospy.Subscriber("/recording", String, testing_tf)
     rospy.spin()
 
 if __name__ == "__main__":
-    setup()
     main()
