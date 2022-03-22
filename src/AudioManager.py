@@ -1,11 +1,9 @@
 # Purpose: Take data from the microphone, preprocess the audio data for classification model input
 # Python3
 # Refer to Confluence: StopBikeTheft/Designs/ROS Designs/AudioManager
-import os
 import scipy.io.wavfile as wav
 from pickle import load as p_load
 import numpy as np
-import time
 from joblib import load as j_load
 import librosa
 

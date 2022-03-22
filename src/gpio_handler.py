@@ -6,23 +6,19 @@ from sre_constants import IN
 from matplotlib.cbook import Stack
 import rospy
 from std_msgs.msg import String
-import os
 import rospkg
-import sys
 import RPi.GPIO as GPIO
 import requests
-import threading
 
 HAS_TRIGGERED = 0
 INPUT_GPIO = 26
+OUTPUT_GPIO = 17
 
 def setup():
-    global INPUT_GPIO
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
-    gpio = 17
     
-    GPIO.setup(gpio, GPIO.OUT)
+    GPIO.setup(OUTPUT_GPIO, GPIO.OUT)
     GPIO.setup(INPUT_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def pin_output(logic):
@@ -37,8 +33,7 @@ def theft_alert():
 
 def class_callback(c):
     global HAS_TRIGGERED
-    global INPUT_GPIO
-    
+
     result = int(c.data)
     override_switch = GPIO.input(INPUT_GPIO)
     
@@ -46,6 +41,7 @@ def class_callback(c):
         HAS_TRIGGERED = 0 # reset HAS_TRIGGERED with button press / switch
         pin_output(0)
     elif result == 1 and HAS_TRIGGERED == 0:
+        HAS_TRIGGERED = 1
         theft_alert() # don't spam cyclists 
         pin_output(1)
     elif HAS_TRIGGERED == 1:

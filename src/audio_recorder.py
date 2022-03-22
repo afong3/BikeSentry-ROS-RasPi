@@ -6,8 +6,6 @@
 
 import rospy
 from std_msgs.msg import String
-import os
-import wave
 import sounddevice as sd
 import time
 import math

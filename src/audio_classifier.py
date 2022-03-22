@@ -5,12 +5,10 @@
 # Node which listens to the /recording topic and classifies the files that it is told to
 # will eventually output a voltage to some pin to connect to Jetson Nano
 
-# NOT TESTED
+
 import rospy
 from std_msgs.msg import String
-import os
 import rospkg
-import sys
 
 rospack = rospkg.RosPack()
 pck_path = rospack.get_path('bike_sentry_raspi')
@@ -47,9 +45,7 @@ def main():
     rospy.init_node("audio_classifier")
     
     rospy.Subscriber("/recording", String, classifier_callback)
-    #rospy.Subscriber("/recording", String, testing_tf)
     rospy.spin()
 
 if __name__ == "__main__":
-    setup()
     main()
