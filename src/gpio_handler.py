@@ -38,7 +38,6 @@ def class_callback(c):
     
     if override_switch == 1: # if override pin is not given power, STATE is forced to be zero
         HAS_TRIGGERED = 0 # reset HAS_TRIGGERED with button press / switch
-        resolve_theft()
         rospy.loginfo("Override switch activated")
         pin_output(0)
     elif result == 1 and HAS_TRIGGERED == 0:

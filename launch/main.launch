@@ -1,5 +1,5 @@
 <launch>
     <node name="audio_classifier" pkg="bike_sentry_raspi" type="audio_classifier.py"/>
     <node name="audio_recorder" pkg="bike_sentry_raspi" type="audio_recorder.py"/>
-    <node name="gpio_hander" pkg="bike_sentry_raspi" type="gpio_handler.py"/>
+    <node name="gpio_handler" pkg="bike_sentry_raspi" type="gpio_handler.py"/>
 </launch>
